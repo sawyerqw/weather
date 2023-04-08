@@ -1,43 +1,30 @@
-<!DOCTYPE html>
 <html lang="en">
+ 
 <head>
-    <meta charset="UTF-8">
-    <title>Midland City Weather</title>
-    <style>
-        body {
-            font-family: monospace;
-            font-size: 1.2em;
-            background-color: #2b2b2b;
-            color: #d3d7cf;
-            text-align: center;
-            margin: 0;
-            padding: 0;
-        }
-
-        pre {
-            white-space: pre-wrap;
-            font-size: 0.8em;
-            padding: 1em;
-            margin-top: 2em;
-            background-color: #2b2b2b;
-            color: #d3d7cf;
-        }
-
-        a {
-            color: #d3d7cf;
-        }
-
-        /* Remove buttons */
-        .one-third:nth-child(1),
-        .one-third:nth-child(2),
-        .one-third:nth-child(3) {
-            display: none;
-        }
-    </style>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content=
+    "width=device-width, initial-scale=1.0" />
 </head>
+ 
 <body>
-    <script src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
-    <script src="/wz_jsgraphics.js"></script>
-    <script src="/cli.js"></script>
+    <p id="temp"></p>
 </body>
+<script>
+  const api_url = "https://wttr.in/midland-city?format=j1";
+ 
+  async function getWeather() {
+
+    const response = await fetch(api_url);
+ 
+    const data = await response.json();
+    
+    const weather = data.current_condition[0];
+    
+    let temp = weather.temp_F;
+    
+    document.getElementById("temp").innerHTML = "temp:" + temp;
+}
+  getWeather();
+  
+</script>
 </html>
