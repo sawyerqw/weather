@@ -53,9 +53,8 @@
         <th>Condition</th>
       </tr>
     </thead>
-    <tbody id="midland-data"></tbody>
+    <tbody id="weather-data"></tbody>
   </table>
-  
   <h1>Dothan</h1>
   <table>
     <thead>
@@ -66,31 +65,20 @@
         <th>Condition</th>
       </tr>
     </thead>
-    <tbody id="dothan-data"></tbody>
+    <tbody id="dothan-weather-data"></tbody>
   </table>
-  
-  <h1>Ozark</h1>
-  <table>
-    <thead>
-      <tr>
-        <th>Temperature</th>
-        <th>Feels Like</th>
-        <th>Humidity</th>
-        <th>Condition</th>
-      </tr>
-    </thead>
-    <tbody id="ozark-data"></tbody>
-  </table>
-  
 </body>
 <script>
-  const midland_url = "https://wttr.in/midland-city?format=j1";
-  const dothan_url = "https://wttr.in/dothan?format=j1";
+  const midland_city_url = "https://wttr.in/midland-city?format=j1";
+  const dothan_url = "https://wttr.in/Dothan?format=j1";
   const ozark_url = "https://wttr.in/ozark-36360?format=j1";
  
-  async function getWeather(url, tableId) {
-    const response = await fetch(url);
+  async function getWeather(api_url, table_id) {
+
+    const response = await fetch(api_url);
+ 
     const data = await response.json();
+    
     const weather = data.current_condition[0];
     
     let temperature = weather.temp_F;
@@ -98,7 +86,8 @@
     let humidity = weather.humidity;
     let condition = weather.weatherDesc[0].value;
     
-    let table = document.getElementById(tableId);
+    let table = document.getElementById(table_id);
+    
     let row = table.insertRow();
     let temperatureCell = row.insertCell();
     let feelsLikeCell = row.insertCell();
@@ -109,7 +98,10 @@
     feelsLikeCell.innerHTML = feelsLike + "°F";
     humidityCell.innerHTML = humidity + "%";
     conditionCell.innerHTML = condition;
+    
   }
-  
-  getWeather(midland_url, "midland-data");
- 
+  getWeather(midland_city_url, "weather-data");
+  getWeather(dothan_url, "dothan-weather-data");
+  getWeather(ozark_url, "ozark-weather-data");
+</script>
+</html>
