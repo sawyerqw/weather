@@ -4,7 +4,7 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content=
     "width=device-width, initial-scale=1.0" />
-  <title>Midland City</title>
+  <title>weather</title>
   <style>
     body {
       background-color: #1a1a1a;
@@ -67,7 +67,25 @@
     </thead>
     <tbody id="dothan-weather-data"></tbody>
   </table>
+  <h1>Ozark</h1>
+  <table>
+    <thead>
+      <tr>
+        <th>Temperature</th>
+        <th>Feels Like</th>
+        <th>Humidity</th>
+        <th>Condition</th>
+      </tr>
+    </thead>
+    <tbody id="ozark-weather-data"></tbody>
+  </table>
+  <script>
+    getWeather(midland_city_url, "weather-data");
+    getWeather(dothan_url, "dothan-weather-data");
+    getWeather(ozark_url, "ozark-weather-data");
+  </script>
 </body>
+
 <script>
   const midland_city_url = "https://wttr.in/midland-city?format=j1";
   const dothan_url = "https://wttr.in/Dothan?format=j1";
@@ -99,25 +117,6 @@
     humidityCell.innerHTML = humidity + "%";
     conditionCell.innerHTML = condition;
 }
-    
-<h1>Ozark</h1>
-<table>
-  <thead>
-    <tr>
-      <th>Temperature</th>
-      <th>Feels Like</th>
-      <th>Humidity</th>
-      <th>Condition</th>
-    </tr>
-  </thead>
-  <tbody id="ozark-weather-data"></tbody>
-</table>
 
-<script>
-  // Existing code
-  
-  getWeather(midland_city_url, "weather-data");
-  getWeather(dothan_url, "dothan-weather-data");
-  getWeather(ozark_url, "ozark-weather-data");
 </script>
 </html>
