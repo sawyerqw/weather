@@ -1,18 +1,43 @@
 <!DOCTYPE html>
 <html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<head>
+    <meta charset="UTF-8">
     <title>Midland City Weather</title>
     <style>
-      /* Hide the buttons at the bottom of the page */
-      #footer {
-        display: none;
-      }
+        body {
+            font-family: monospace;
+            font-size: 1.2em;
+            background-color: #2b2b2b;
+            color: #d3d7cf;
+            text-align: center;
+            margin: 0;
+            padding: 0;
+        }
+
+        pre {
+            white-space: pre-wrap;
+            font-size: 0.8em;
+            padding: 1em;
+            margin-top: 2em;
+            background-color: #2b2b2b;
+            color: #d3d7cf;
+        }
+
+        a {
+            color: #d3d7cf;
+        }
+
+        /* Remove buttons */
+        .one-third:nth-child(1),
+        .one-third:nth-child(2),
+        .one-third:nth-child(3) {
+            display: none;
+        }
     </style>
-  </head>
-  <body>
-    <!-- Include the wttr.in/midland-city website using an iframe -->
-    <iframe src="https://wttr.in/Midland+City"></iframe>
-  </body>
+</head>
+<body>
+    <script src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
+    <script src="/wz_jsgraphics.js"></script>
+    <script src="/cli.js"></script>
+</body>
 </html>
