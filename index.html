@@ -1,60 +1,48 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Midland City</title>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content=
+    "width=device-width, initial-scale=1.0" />
+  <title>Midland City Weather</title>
   <style>
     body {
-      background-color: #232323;
+      background-color: #1a1a1a;
       color: #fff;
-      font-family: sans-serif;
+      font-family: system-ui;
     }
     table {
       margin: 20px auto;
       border-collapse: collapse;
-      max-width: 600px;
-      background-color: #2b2b2b;
+      width: 400px;
     }
-    th, td {
+    th,
+    td {
       padding: 10px;
       text-align: center;
-      border: 1px solid #444;
+      border: 1px solid #fff;
     }
     th {
-      background-color: #444;
+      background-color: #333;
     }
-    tbody tr {
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      justify-content: center;
-    }
-    tbody tr td {
-      border-top: none;
-    }
-    @media (max-width: 600px) {
-      thead {
-        display: none;
+    
+    /* Responsive CSS */
+    @media screen and (max-width: 480px) {
+      table {
+        width: 100%;
       }
-      tbody tr {
-        flex-direction: row;
-        justify-content: space-between;
-        margin-bottom: 10px;
+      th, td {
+        display: block;
+        width: 100%;
       }
-      tbody tr td {
-        border-top: 1px solid #444;
-        width: 48%;
-        padding: 5px;
-      }
-      tbody tr td:last-child {
-        text-align: right;
+      th {
+        text-align: center;
       }
     }
   </style>
 </head>
 <body>
-  <h1>Midland City</h1>
+  <h1>Midland City Weather</h1>
   <table>
     <thead>
       <tr>
@@ -66,38 +54,28 @@
     </thead>
     <tbody id="weather-data"></tbody>
   </table>
+  <script>
+    const api_url = "https://wttr.in/midland-city?format=j1";
+    async function getWeather() {
+      const response = await fetch(api_url);
+      const data = await response.json();
+      const weather = data.current_condition[0];
+      let temperature = weather.temp_F;
+      let feelsLike = weather.FeelsLikeF;
+      let humidity = weather.humidity;
+      let condition = weather.weatherDesc[0].value;
+      let table = document.getElementById("weather-data");
+      let row = table.insertRow();
+      let temperatureCell = row.insertCell();
+      let feelsLikeCell = row.insertCell();
+      let humidityCell = row.insertCell();
+      let conditionCell = row.insertCell();
+      temperatureCell.innerHTML = temperature + "°F";
+      feelsLikeCell.innerHTML = feelsLike + "°F";
+      humidityCell.innerHTML = humidity + "%";
+      conditionCell.innerHTML = condition;
+    }
+    getWeather();
+  </script>
 </body>
-<script>
-  const api_url = "https://wttr.in/midland-city?format=j1";
- 
-  async function getWeather() {
-
-    const response = await fetch(api_url);
- 
-    const data = await response.json();
-    
-    const weather = data.current_condition[0];
-    
-    let temperature = weather.temp_F;
-    let feelsLike = weather.FeelsLikeF;
-    let humidity = weather.humidity;
-    let condition = weather.weatherDesc[0].value;
-    
-    let table = document.getElementById("weather-data");
-    
-    let row = table.insertRow();
-    let temperatureCell = row.insertCell();
-    let feelsLikeCell = row.insertCell();
-    let humidityCell = row.insertCell();
-    let conditionCell = row.insertCell();
-    
-    temperatureCell.innerHTML = temperature + "°F";
-    feelsLikeCell.innerHTML = feelsLike + "°F";
-    humidityCell.innerHTML = humidity + "%";
-    conditionCell.innerHTML = condition;
-    
-  }
-  getWeather();
-  
-</script>
 </html>
