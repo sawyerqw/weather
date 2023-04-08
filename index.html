@@ -4,7 +4,7 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content=
     "width=device-width, initial-scale=1.0" />
-  <title>Weather</title>
+  <title>Midland City</title>
   <style>
     body {
       background-color: #1a1a1a;
@@ -53,15 +53,30 @@
         <th>Condition</th>
       </tr>
     </thead>
-    <tbody id="weather-data"></tbody>
+    <tbody id="midland-data"></tbody>
   </table>
+
+  <h1>Dothan</h1>
+  <table>
+    <thead>
+      <tr>
+        <th>Temperature</th>
+        <th>Feels Like</th>
+        <th>Humidity</th>
+        <th>Condition</th>
+      </tr>
+    </thead>
+    <tbody id="dothan-data"></tbody>
+  </table>
+  
 </body>
 <script>
-  const api_url = "https://wttr.in/midland-city?format=j1";
+  const midland_url = "https://wttr.in/midland-city?format=j1";
+  const dothan_url = "https://wttr.in/dothan?format=j1";
  
-  async function getWeather() {
+  async function getWeather(url, tableId) {
 
-    const response = await fetch(api_url);
+    const response = await fetch(url);
  
     const data = await response.json();
     
@@ -72,7 +87,7 @@
     let humidity = weather.humidity;
     let condition = weather.weatherDesc[0].value;
     
-    let table = document.getElementById("weather-data");
+    let table = document.getElementById(tableId);
     
     let row = table.insertRow();
     let temperatureCell = row.insertCell();
@@ -86,7 +101,9 @@
     conditionCell.innerHTML = condition;
     
   }
-  getWeather();
+  
+  getWeather(midland_url, "midland-data");
+  getWeather(dothan_url, "dothan-data");
   
 </script>
 </html>
