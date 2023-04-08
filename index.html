@@ -5,31 +5,41 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Midland City Weather</title>
     <link
+      href="https://fonts.googleapis.com/css2?family=Roboto+Mono&display=swap"
       rel="stylesheet"
+    />
+    <link
+      crossorigin="anonymous"
       href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css"
       integrity="sha384-OgVRvuATP1z7JjHLkuOU7Xw704+h835Lr+6QL9UvYjZE3Ipu6Tp75j7Bh/kR0JKI"
-      crossorigin="anonymous"
+      rel="stylesheet"
     />
     <style>
       body {
         background-color: #212529;
         color: #fff;
+        font-family: "Roboto Mono", monospace;
+        font-size: 16px;
+        line-height: 1.4;
       }
 
       .weather-table {
         margin-top: 20px;
+        border-collapse: collapse;
       }
 
       .weather-table th {
         width: 50%;
         text-align: right;
         padding: 5px 10px;
+        border: 1px solid #fff;
       }
 
       .weather-table td {
         width: 50%;
         text-align: left;
         padding: 5px 10px;
+        border: 1px solid #fff;
       }
     </style>
   </head>
@@ -60,38 +70,34 @@
       </table>
     </div>
     <script
-      src="https://code.jquery.com/jquery-3.5.1.min.js"
-      integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj"
       crossorigin="anonymous"
+      integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj"
+      src="https://code.jquery.com/jquery-3.5.1.min.js"
     ></script>
     <script>
       $(document).ready(function () {
         $.getJSON(
           "https://api.weatherapi.com/v1/current.json?key=YOUR_API_KEY&q=Midland%20City",
           function (data) {
-            $("#temp").text(
+            $("#temp").html(
               data.current.temp_f +
-                " °F / " +
+                " &#8457; / " +
                 data.current.temp_c +
-                " °C"
+                " &#8451;"
             );
-            $("#feels-like").text(
+            $("#feels-like").html(
               data.current.feelslike_f +
-                " °F / " +
+                " &#8457; / " +
                 data.current.feelslike_c +
-                " °C"
+                " &#8451;"
             );
-            $("#condition").text(data.current.feelslike_c);
-            $("#humidity").text(data.current.humidity + "%");
-            $("#wind-speed").text(
-              data.current.wind_mph +
-                " mph / " +
-                data.current.wind_kph +
-                " km/h"
+            $("#condition").text(data.current.condition.text);
+            "data.current.wind_kph + " kph"
             );
-          }
-        );
-      });
-    </script>
+}
+);
+});
+</script>
+
   </body>
 </html>
