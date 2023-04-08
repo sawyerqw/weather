@@ -7,10 +7,20 @@
     "width=device-width, initial-scale=1.0" />
   <title>Weather</title>
   <style>
-    body {
+    .dark-mode body {
       background-color: #1a1a1a;
       color: #fff;
       font-family: system-ui;
+    }
+    .dark-mode table {
+      border-color: #fff;
+    }
+    .dark-mode th,
+    .dark-mode td {
+      border-color: #fff;
+    }
+    .dark-mode th {
+      background-color: #333;
     }
     table {
       margin: 20px auto;
@@ -21,12 +31,12 @@
     td {
       padding: 10px;
       text-align: center;
-      border: 1px solid #fff;
-    }
-    th {
-      background-color: #333;
+      border: 1px solid #000;
     }
   </style>
+  <script>
+    document.body.classList.toggle("dark-mode");
+  </script>
 </head>
  
 <body>
@@ -42,38 +52,37 @@
     </thead>
     <tbody id="weather-data"></tbody>
   </table>
-</body>
-<script>
-  const api_url = "https://wttr.in/midland-city?format=j1";
+  <script>
+    const api_url = "https://wttr.in/midland-city?format=j1";
  
-  async function getWeather() {
+    async function getWeather() {
 
-    const response = await fetch(api_url);
- 
-    const data = await response.json();
-    
-    const weather = data.current_condition[0];
-    
-    let temperature = weather.temp_F;
-    let feelsLike = weather.FeelsLikeF;
-    let humidity = weather.humidity;
-    let condition = weather.weatherDesc[0].value;
-    
-    let table = document.getElementById("weather-data");
-    
-    let row = table.insertRow();
-    let temperatureCell = row.insertCell();
-    let feelsLikeCell = row.insertCell();
-    let humidityCell = row.insertCell();
-    let conditionCell = row.insertCell();
-    
-    temperatureCell.innerHTML = temperature + "°F";
-    feelsLikeCell.innerHTML = feelsLike + "°F";
-    humidityCell.innerHTML = humidity + "%";
-    conditionCell.innerHTML = condition;
-    
-  }
-  getWeather();
-  
-</script>
+      const response = await fetch(api_url);
+   
+      const data = await response.json();
+      
+      const weather = data.current_condition[0];
+      
+      let temperature = weather.temp_F;
+      let feelsLike = weather.FeelsLikeF;
+      let humidity = weather.humidity;
+      let condition = weather.weatherDesc[0].value;
+      
+      let table = document.getElementById("weather-data");
+      
+      let row = table.insertRow();
+      let temperatureCell = row.insertCell();
+      let feelsLikeCell = row.insertCell();
+      let humidityCell = row.insertCell();
+      let conditionCell = row.insertCell();
+      
+      temperatureCell.innerHTML = temperature + "°F";
+      feelsLikeCell.innerHTML = feelsLike + "°F";
+      humidityCell.innerHTML = humidity + "%";
+      conditionCell.innerHTML = condition;
+      
+    }
+    getWeather();
+  </script>
+</body>
 </html>
