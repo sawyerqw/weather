@@ -4,118 +4,106 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content=
     "width=device-width, initial-scale=1.0" />
-  <title>Weather Tables</title>
-<style>
-  :root {
-    --bg-color: #1a1a1a;
-    --text-color: #000;
-    --table-color: #fff;
-    --border-color: #333;
-    --font-family: system-ui;
-  }
-  body {
-    background-color: var(--bg-color);
-    color: var(--text-color);
-    font-family: var(--font-family);
-  }
-  table {
-    margin: 20px auto;
-    border-collapse: collapse;
-    max-width: 100%;
-    background-color: var(--table-color);
-    border: 1px solid var(--border-color);
-  }
-  th,
-  td {
-    padding: 10px;
-    text-align: center;
-    border: 1px solid var(--border-color);
-    font-size: 16px;
-    color: var(--text-color);
-  }
-  th {
-    background-color: var(--border-color);
-    color: var(--text-color);
-    font-size: 18px;
-  }
-
-  /* Media queries */
-  @media screen and (max-width: 480px) {
+  <title>Midland City</title>
+  <style>
+    body {
+      background-color: #1a1a1a;
+      color: #fff;
+      font-family: system-ui;
+    }
+    table {
+      margin: 20px auto;
+      border-collapse: collapse;
+      max-width: 100%;
+    }
     th,
     td {
-      padding: 5px;
-      font-size: 14px;
-    }
-    th {
+      padding: 10px;
+      text-align: center;
+      border: 1px solid #fff;
       font-size: 16px;
     }
-  }
-</style>
+    th {
+      background-color: #333;
+      font-size: 18px;
+    }
+
+    /* Media queries */
+    @media screen and (max-width: 480px) {
+      th,
+      td {
+        padding: 5px;
+        font-size: 14px;
+      }
+      th {
+        font-size: 16px;
+      }
+    }
+  </style>
 </head>
  
 <body>
-  <script src="cities.json"></script>
-  
-  <script>
-async function getWeather(url, tableId) {
+  <h1>Midland City</h1>
+  <table>
+    <thead>
+      <tr>
+        <th>Temperature</th>
+        <th>Feels Like</th>
+        <th>Humidity</th>
+        <th>Condition</th>
+      </tr>
+    </thead>
+    <tbody id="midland-data"></tbody>
+  </table>
 
-  const response = await fetch(url);
-
-  const data = await response.json();
-
-  const weather = data.current_condition[0];
-
-  let temperature = weather.temp_F;
-  let feelsLike = weather.FeelsLikeF;
-  let humidity = weather.humidity;
-  let condition = weather.weatherDesc[0].value;
-
-  let table = document.getElementById(tableId);
-
-  let row = table.insertRow();
-  let temperatureCell = row.insertCell();
-  let feelsLikeCell = row.insertCell();
-  let humidityCell = row.insertCell();
-  let conditionCell = row.insertCell();
-
-  temperatureCell.innerHTML = temperature + "°F";
-  feelsLikeCell.innerHTML = feelsLike + "°F";
-  humidityCell.innerHTML = humidity + "%";
-  conditionCell.innerHTML = condition;
-
-}
-
-
-    cities.forEach(city => {
-      let cityName = city.name;
-      let cityUrl = city.url;
-      
-      let div = document.createElement("div");
-      div.setAttribute("id", cityName.replace(/\s/g, "-").toLowerCase());
-      
-      let table = document.createElement("table");
-      let tableHead = table.createTHead();
-      let tableHeadRow = tableHead.insertRow();
-      let temperatureHeader = tableHeadRow.insertCell();
-      let feelsLikeHeader = tableHeadRow.insertCell();
-      let humidityHeader = tableHeadRow.insertCell();
-      let conditionHeader = tableHeadRow.insertCell();
-      
-      temperatureHeader.innerHTML = "Temperature";
-      feelsLikeHeader.innerHTML = "Feels Like";
-      humidityHeader.innerHTML = "Humidity";
-      conditionHeader.innerHTML = "Condition";
-      
-      let tableBody = table.createTBody();
-      
-      getWeather(cityUrl, cityName.replace(/\s/g, "-").toLowerCase() + "-data");
-      
-      table.setAttribute("id", cityName.replace(/\s/g, "-").toLowerCase() + "-table");
-      div.appendChild(table);
-      document.body.appendChild(div);
-    });
-  </script>
+  <h1>Dothan</h1>
+  <table>
+    <thead>
+      <tr>
+        <th>Temperature</th>
+        <th>Feels Like</th>
+        <th>Humidity</th>
+        <th>Condition</th>
+      </tr>
+    </thead>
+    <tbody id="dothan-data"></tbody>
+  </table>
   
 </body>
+<script>
+  const midland_url = "https://wttr.in/midland-city?format=j1";
+  const dothan_url = "https://wttr.in/dothan?format=j1";
+ 
+  async function getWeather(url, tableId) {
 
+    const response = await fetch(url);
+ 
+    const data = await response.json();
+    
+    const weather = data.current_condition[0];
+    
+    let temperature = weather.temp_F;
+    let feelsLike = weather.FeelsLikeF;
+    let humidity = weather.humidity;
+    let condition = weather.weatherDesc[0].value;
+    
+    let table = document.getElementById(tableId);
+    
+    let row = table.insertRow();
+    let temperatureCell = row.insertCell();
+    let feelsLikeCell = row.insertCell();
+    let humidityCell = row.insertCell();
+    let conditionCell = row.insertCell();
+    
+    temperatureCell.innerHTML = temperature + "°F";
+    feelsLikeCell.innerHTML = feelsLike + "°F";
+    humidityCell.innerHTML = humidity + "%";
+    conditionCell.innerHTML = condition;
+    
+  }
+  
+  getWeather(midland_url, "midland-data");
+  getWeather(dothan_url, "dothan-data");
+  
+</script>
 </html>
