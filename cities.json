@@ -1,0 +1,16 @@
+{
+  "cities": [
+    {
+      "name": "Midland City",
+      "url": "https://wttr.in/midland-city?format=j1"
+    },
+    {
+      "name": "Dothan",
+      "url": "https://wttr.in/dothan?format=j1"
+    },
+    {
+      "name": "Ozark",
+      "url": "https://wttr.in/ozark-36360?format=j1"
+    }
+  ]
+}
