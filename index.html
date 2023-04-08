@@ -99,7 +99,22 @@
     humidityCell.innerHTML = humidity + "%";
     conditionCell.innerHTML = condition;
     
-  }
+<h1>Ozark</h1>
+<table>
+  <thead>
+    <tr>
+      <th>Temperature</th>
+      <th>Feels Like</th>
+      <th>Humidity</th>
+      <th>Condition</th>
+    </tr>
+  </thead>
+  <tbody id="ozark-weather-data"></tbody>
+</table>
+
+<script>
+  // Existing code
+  
   getWeather(midland_city_url, "weather-data");
   getWeather(dothan_url, "dothan-weather-data");
   getWeather(ozark_url, "ozark-weather-data");
